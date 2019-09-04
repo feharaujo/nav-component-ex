@@ -3,55 +3,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/navigation_dashboard">
+    app:startDestination="@id/destination_dashboard">
 
     <!-- 3- Destinations -->
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/destination_dashboard"
         android:name="com.example.navcomponentex.frags.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
-    <fragment
-        android:id="@+id/navigation_notification"
-        android:name="com.example.navcomponentex.frags.NotificationFragment"
-        android:label="fragment_notification"
-        tools:layout="@layout/fragment_notification">
+    <!-- 9- Nested navigation -->
+   <!-- <navigation
+        android:id="@+id/destination_notification"
+        app:startDestination="@id/navigation_notification" >-->
+        <fragment
+            android:id="@+id/destination_notification"
+            android:name="com.example.navcomponentex.frags.NotificationFragment"
+            android:label="fragment_notification"
+            tools:layout="@layout/fragment_notification">
 
-        <!-- 6- ACTION -->
-        <action
-            android:id="@+id/next_action"
-            app:destination="@id/navigation_details" />
+            <!-- 6- ACTION -->
+            <action
+                android:id="@+id/next_action"
+                app:destination="@id/destination_details"
+                app:enterAnim="@anim/enter_from_right"
+                app:exitAnim="@anim/exit_to_left"
+                app:popEnterAnim="@anim/enter_from_left"
+                app:popExitAnim="@anim/exit_to_right" />
 
-    </fragment>
-    <fragment
-        android:id="@+id/navigation_details"
-        android:name="com.example.navcomponentex.details.DetailsFragment"
-        android:label="fragment_details"
-        tools:layout="@layout/fragment_details">
+        </fragment>
+        <fragment
+            android:id="@+id/destination_final_details"
+            android:name="com.example.navcomponentex.details.FinalDetailsFragment"
+            android:label="fragment_final_details"
+            tools:layout="@layout/fragment_final_details">
 
-        <!-- 7- Receiving args -->
-        <argument
-            android:name="numNotification"
-            android:defaultValue="0"
-            app:argType="integer" />
-        <action
-            android:id="@+id/next_action"
-            app:destination="@id/navigation_final_details" />
+            <!-- 8- PopUp clean stack -->
+            <action
+                android:id="@+id/finish_action"
+                app:destination="@id/destination_notification"
+                app:popUpTo="@id/destination_notification"
+                app:popUpToInclusive="true" />
+        </fragment>
+        <fragment
+            android:id="@+id/destination_details"
+            android:name="com.example.navcomponentex.details.DetailsFragment"
+            android:label="fragment_details"
+            tools:layout="@layout/fragment_details">
 
-    </fragment>
-    <fragment
-        android:id="@+id/navigation_final_details"
-        android:name="com.example.navcomponentex.details.FinalDetailsFragment"
-        android:label="fragment_final_details"
-        tools:layout="@layout/fragment_final_details" >
+            <!-- 7- Receiving args -->
+            <argument
+                android:name="numNotification"
+                android:defaultValue="0"
+                app:argType="integer" />
+            <action
+                android:id="@+id/next_action"
+                app:destination="@id/destination_final_details"
+                app:enterAnim="@anim/enter_from_right"
+                app:exitAnim="@anim/exit_to_left"
+                app:popEnterAnim="@anim/enter_from_left"
+                app:popExitAnim="@anim/exit_to_right" />
 
-        <!-- 8- PopUp clean stack -->
-        <action
-            android:id="@+id/finish_action"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/navigation_notification"
-            app:destination="@id/navigation_notification" />
-    </fragment>
+        </fragment>
+    <!--<navigation>-->
 
 </navigation>
