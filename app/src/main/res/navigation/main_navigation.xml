@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_dashboard">
+
+    <!-- 3- Destinations -->
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.example.navcomponentex.frags.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_notification"
+        android:name="com.example.navcomponentex.frags.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification">
+
+        <!-- 6- ACTION -->
+        <action
+            android:id="@+id/next_action"
+            app:destination="@id/navigation_details" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_details"
+        android:name="com.example.navcomponentex.details.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details">
+
+        <!-- 7- Receiving args -->
+        <argument
+            android:name="numNotification"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/next_action"
+            app:destination="@id/navigation_final_details" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_final_details"
+        android:name="com.example.navcomponentex.details.FinalDetailsFragment"
+        android:label="fragment_final_details"
+        tools:layout="@layout/fragment_final_details" >
+
+        <!-- 8- PopUp clean stack -->
+        <action
+            android:id="@+id/finish_action"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/navigation_notification"
+            app:destination="@id/navigation_notification" />
+    </fragment>
+
+</navigation>
